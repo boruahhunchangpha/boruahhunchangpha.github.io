@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hunchangpha Baruah – B.Tech CSE student</title>
+<meta name="description" content="Hunchangpha Baruah, B.Tech student in Computer Science and Engineering at Dhemaji Engineering College, India.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f2f5f7;
+    --grid: rgba(20, 52, 84, .09);
+    --ink: #12263a;
+    --ink-soft: #46596b;
+    --line: #12263a;
+    --accent: #1f4fd8;
+    --accent-ink: #ffffff;
+    --muted-bar: #c3d0dc;
+    --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --body: "Newsreader", Georgia, "Times New Roman", serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0f1a26;
+      --grid: rgba(150, 190, 235, .09);
+      --ink: #e8eef5;
+      --ink-soft: #9fb2c4;
+      --line: #e8eef5;
+      --accent: #6d93ff;
+      --accent-ink: #0f1a26;
+      --muted-bar: #2a3b4e;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0f1a26;
+    --grid: rgba(150, 190, 235, .09);
+    --ink: #e8eef5;
+    --ink-soft: #9fb2c4;
+    --line: #e8eef5;
+    --accent: #6d93ff;
+    --accent-ink: #0f1a26;
+    --muted-bar: #2a3b4e;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background-color: var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 32px 32px;
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .wrap { max-width: 62rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* Hero */
+  header.hero { padding: clamp(3.5rem, 12vw, 8rem) 0 3rem; }
+  h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(2.8rem, 11vw, 7.5rem);
+    line-height: .92;
+    letter-spacing: -.035em;
+    margin: 0;
+  }
+  h1 span { display: block; }
+  .role {
+    margin: 1.75rem 0 0;
+    max-width: 34rem;
+    font-size: 1.3rem;
+    color: var(--ink-soft);
+  }
+  .role strong { color: var(--ink); font-weight: 500; }
+
+  /* Timeline */
+  .timeline-block { padding: 1rem 0 3.5rem; }
+  h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.6rem;
+    letter-spacing: -.01em;
+    margin: 0 0 1.5rem;
+  }
+  .timeline {
+    position: relative;
+    border-top: 2px solid var(--line);
+    border-bottom: 2px solid var(--line);
+    background: color-mix(in srgb, var(--paper) 80%, transparent);
+  }
+  .years {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: .85rem;
+    color: var(--ink-soft);
+  }
+  .years span {
+    padding: .4rem .35rem;
+    border-left: 1px solid var(--line);
+  }
+  .years span:first-child { border-left: 0; }
+  .track { position: relative; height: 5.5rem; border-top: 1px solid var(--line); }
+  .track::before {
+    /* year gridlines continue through the track */
+    content: "";
+    position: absolute; inset: 0;
+    background-image: linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 12.5% 100%;
+    opacity: .25;
+  }
+  .bar {
+    position: absolute;
+    height: 2.1rem;
+    display: flex; align-items: center;
+    padding: 0 .6rem;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: .85rem;
+    white-space: nowrap;
+    overflow: hidden;
+    transform-origin: left center;
+    animation: draw .9s cubic-bezier(.2, .7, .2, 1) both;
+  }
+  .bar.school {
+    top: .6rem;
+    background: var(--muted-bar);
+    color: var(--ink);
+    left: 4.17%; width: 22.92%;
+  }
+  .bar.college {
+    top: 2.9rem;
+    background: var(--accent);
+    color: var(--accent-ink);
+    left: 44.79%; width: 48.96%;
+    animation-delay: .25s;
+  }
+  .now {
+    position: absolute; top: 0; bottom: 0;
+    width: 0;
+    border-left: 2px dashed var(--ink);
+    display: none;
+  }
+  .now.on { display: block; }
+  .now::after {
+    content: "Today";
+    position: absolute; bottom: calc(100% + 0px); left: 0;
+    transform: translate(-50%, 0);
+    font-family: var(--display);
+    font-size: .75rem; font-weight: 700;
+    background: var(--ink); color: var(--paper);
+    padding: .1rem .45rem;
+    top: auto;
+    margin-bottom: 0;
+    white-space: nowrap;
+    display: none;
+  }
+  .timeline-note { margin: .9rem 0 0; font-size: .95rem; color: var(--ink-soft); }
+  .timeline-note b { color: var(--ink); font-weight: 500; }
+
+  @keyframes draw {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  /* Sections */
+  section { padding: 0 0 3.5rem; }
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  @media (min-width: 52rem) {
+    .cols { grid-template-columns: 1.3fr 1fr; gap: 4rem; }
+  }
+  .entry { padding: 1.25rem 0; border-top: 2px solid var(--line); }
+  .entry:last-child { border-bottom: 2px solid var(--line); }
+  .entry h3 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.3rem;
+    line-height: 1.2;
+    margin: 0 0 .25rem;
+  }
+  .entry p { margin: 0; color: var(--ink-soft); }
+  .entry .when { color: var(--ink); font-weight: 500; }
+
+  .skills { list-style: none; margin: 0; padding: 0; }
+  .skills li {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-top: 2px solid var(--line);
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.3rem;
+  }
+  .skills li:last-child { border-bottom: 2px solid var(--line); }
+  .skills small {
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: 1rem;
+    color: var(--ink-soft);
+  }
+
+  /* Contact */
+  .contact-list { list-style: none; margin: 0; padding: 0; }
+  .contact-list li { border-top: 2px solid var(--line); }
+  .contact-list li:last-child { border-bottom: 2px solid var(--line); }
+  .contact-list a {
+    display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+    padding: 1.1rem 0;
+    text-decoration: none;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(1.05rem, 3.6vw, 1.5rem);
+    overflow-wrap: anywhere;
+  }
+  .contact-list a:hover { background: var(--accent); color: var(--accent-ink); padding-left: .75rem; padding-right: .75rem; }
+  .contact-list a { transition: padding .15s ease, background-color .15s ease; }
+  .contact-list .what { font-family: var(--body); font-weight: 400; font-size: 1rem; color: inherit; opacity: .75; align-self: center; }
+
+  footer { padding: 2rem 0 3rem; font-size: .95rem; color: var(--ink-soft); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bar { animation: none; }
+    html { scroll-behavior: auto; }
+    .contact-list a { transition: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <h1><span>Hunchangpha</span><span>Baruah</span></h1>
+      <p class="role"><strong>B.Tech student in Computer Science and Engineering</strong> at Dhemaji Engineering College, India.</p>
+    </header>
+
+    <div class="timeline-block" aria-labelledby="path-title">
+      <h2 id="path-title">Education, 2022 to 2029</h2>
+      <div class="timeline" role="img" aria-label="Timeline: Brilliant Academy from May 2022 to February 2024, then B.Tech at Dhemaji Engineering College from August 2025 to June 2029.">
+        <div class="years" aria-hidden="true">
+          <span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>2026</span><span>2027</span><span>2028</span><span>2029</span>
+        </div>
+        <div class="track" aria-hidden="true">
+          <div class="bar school">School</div>
+          <div class="bar college">B.Tech, CSE</div>
+          <div class="now" id="now"></div>
+        </div>
+      </div>
+      <p class="timeline-note">The dashed line marks <b id="today-label">today</b>.</p>
+    </div>
+
+    <div class="cols">
+      <section aria-labelledby="edu-title">
+        <h2 id="edu-title">Education</h2>
+        <article class="entry">
+          <h3>Dhemaji Engineering College (DEC)</h3>
+          <p>Bachelor of Technology in Computer Science and Engineering</p>
+          <p class="when">August 2025 to June 2029</p>
+        </article>
+        <article class="entry">
+          <h3>Brilliant Academy</h3>
+          <p>High school, Physics, Chemistry and Mathematics</p>
+          <p class="when">May 2022 to February 2024</p>
+        </article>
+      </section>
+
+      <section aria-labelledby="skills-title">
+        <h2 id="skills-title">Skills</h2>
+        <ul class="skills">
+          <li>C programming <small>Top skill</small></li>
+          <li>Engineering <small>Top skill</small></li>
+          <li>Spanish <small>Elementary</small></li>
+        </ul>
+      </section>
+    </div>
+
+    <section aria-labelledby="contact-title" style="margin-top: 1rem;">
+      <h2 id="contact-title">Get in touch</h2>
+      <ul class="contact-list">
+        <li><a href="mailto:boruahhunchangpha@gmail.com">boruahhunchangpha@gmail.com <span class="what">Email</span></a></li>
+        <li><a href="tel:+918822372966">8822372966 <span class="what">Mobile</span></a></li>
+        <li><a href="https://www.linkedin.com/in/hunchangphabaruah-49a10b371" target="_blank" rel="noopener">linkedin.com/in/hunchangphabaruah-49a10b371 <span class="what">LinkedIn</span></a></li>
+      </ul>
+    </section>
+
+    <footer>Hunchangpha Baruah</footer>
+  </div>
+
+  <script>
+    // Place the "today" marker on the timeline (Jan 2022 to Dec 2029 = 96 months).
+    (function () {
+      var start = new Date(2022, 0, 1), months = 96;
+      var d = new Date();
+      var idx = (d.getFullYear() - start.getFullYear()) * 12 + d.getMonth() + (d.getDate() - 1) / 31;
+      var pct = idx / months * 100;
+      var el = document.getElementById("now");
+      var label = document.getElementById("today-label");
+      if (pct >= 0 && pct <= 100) {
+        el.style.left = pct + "%";
+        el.classList.add("on");
+        label.textContent = d.toLocaleDateString("en-GB", { month: "long", year: "numeric" });
+      }
+    })();
+  </script>
+</body>
+</html>
